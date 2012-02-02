@@ -3,7 +3,7 @@
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
-%include re62-live-gnome.ks
+%include re62-live-kde.ks
 
 lang ru_RU.UTF-8
 keyboard ru
