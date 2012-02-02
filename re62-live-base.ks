@@ -480,7 +480,7 @@ if [ "\\\$PW" ]; then
 fi
 
 ### enable auto-login
-if [ -d /etc/gdm ]; then
+if [ -f /etc/gdm/custom.conf ]; then
   if [ ! "\\\$( cmdline_parameter noautologin )" ]; then
     cat >> /etc/gdm/custom.conf << FOE
 [daemon]
