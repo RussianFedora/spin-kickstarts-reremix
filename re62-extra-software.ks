@@ -21,7 +21,6 @@ gstreamer-plugins-ugly
 gstreamer-plugins-bad
 
 # install extra software from epel
-gparted
 NetworkManager-openvpn
 NetworkManager-vpnc
 NetworkManager-pptp

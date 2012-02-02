@@ -55,6 +55,7 @@ part / --size 4096 --fstype ext4
 -orca
 rhythmbox
 -vino
+gparted
 
 @input-methods
 @print-client
