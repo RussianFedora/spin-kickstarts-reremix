@@ -12,10 +12,9 @@ part / --size 4096 --fstype ext4
 # Include kickstart files
 ########################################################################
 
-%include sl62-live-base.ks
-## %include sl62-config-icewm.ks
-%include sl62-extra-software.ks
-%include sl62-doc.ks
+%include re62-live-base.ks
+%include re62-extra-software.ks
+%include re62-doc.ks
 
 
 ########################################################################
@@ -54,16 +53,16 @@ part / --size 4096 --fstype ext4
 -gnome-user-share
 -nautilus-sendto
 -orca
--rhythmbox
+rhythmbox
 -vino
 
 @input-methods
-
+@print-client
 @internet-applications
 # package added to @internet-applications
 xchat
 # packages removed from @internet-applications
--ekiga
+ekiga
 
 @internet-browser
 
@@ -71,6 +70,7 @@ xchat
 ### SL LiveCD specific changes
 
 ## packages to remove to save diskspace
+thunderbird
 -evolution
 -evolution-help
 -evolution-mapi
@@ -78,15 +78,20 @@ xchat
 -redhat-lsb-graphics
 -qt3
 -xinetd
--openswan
 -pinentry-gtk
--seahorse
+seahorse
 -hunspell-*
 -words
 -nano
 -pinfo
 -vim-common
--vim-enhanced
+vim-enhanced
+
+evince
+gimp
+totem-mozplugin
+transmission-gtk
+pidgin
 
 ## remove some fonts and input methods
 # remove Chinese font (Ming face) (8.9 MB)
@@ -99,7 +104,6 @@ xchat
 
 ## packages to add
 lftp
--thunderbird
 #@openafs-client
 cups
 cups-pk-helper

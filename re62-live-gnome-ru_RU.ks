@@ -1,9 +1,9 @@
-# sl62-livecd-gnome-ru_RU.ks 
+# re62-live-gnome-ru_RU.ks 
 #
 # Maintainer(s):
 # - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
 
-%include sl62-livecd-gnome.ks
+%include re62-live-gnome.ks
 
 lang ru_RU.UTF-8
 keyboard ru

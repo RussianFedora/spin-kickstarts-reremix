@@ -1,6 +1,6 @@
 ########################################################################
 #
-# sl62-doc.ks
+# re62-doc.ks
 #
 # Create /usr/share/doc/HTML/index.html 
 # A short documentation for Scientific Linux Live CD/DVD

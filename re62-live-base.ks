@@ -1,8 +1,8 @@
 ########################################################################
 #
-# sl62-live-base.ks
+# re62-live-base.ks
 #
-# Defines the basics for all kickstarts of sl62-live
+# Defines the basics for all kickstarts of re62-live
 # Kickstarts including this template can override these settings
 #
 ########################################################################
@@ -624,6 +624,8 @@ if [ "\\\$kb" ]; then
     exists system-config-keyboard --noui \\\$kb 
 fi
 
+# turn off rfremixconf script
+chkconfig --level 345 reremixconf off 2>/dev/null
 
 EOF_lateinitscript
 #***********************************************************************

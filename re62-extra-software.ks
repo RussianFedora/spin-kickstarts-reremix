@@ -1,6 +1,6 @@
 ########################################################################
 #
-# sl62-extra-software.ks
+# re62-extra-software.ks
 #
 # Extra software for SL LiveCD
 #
@@ -25,6 +25,7 @@ gparted
 NetworkManager-openvpn
 NetworkManager-vpnc
 NetworkManager-pptp
+NetworkManager-openswan
 vpnc-consoleuser
 ntfs-3g
 fuse-sshfs
@@ -46,13 +47,8 @@ libreoffice-impress
 libreoffice-draw
 libreoffice-calc
 autocorr-en
-evince
-gimp
 totem-mozplugin
 java-1.6.0-openjdk
 icedtea-web
-
-transmission-gtk
-pidgin
 
 %end
