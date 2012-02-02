@@ -56,6 +56,7 @@ part / --size 4096 --fstype ext4
 rhythmbox
 -vino
 gparted
+totem-mozplugin
 
 @input-methods
 @print-client

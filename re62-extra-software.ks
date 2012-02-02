@@ -46,7 +46,6 @@ libreoffice-impress
 libreoffice-draw
 libreoffice-calc
 autocorr-en
-totem-mozplugin
 java-1.6.0-openjdk
 icedtea-web
 
