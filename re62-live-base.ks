@@ -480,7 +480,8 @@ if [ "\\\$PW" ]; then
 fi
 
 ### enable auto-login
-if [ ! "\\\$( cmdline_parameter noautologin )" ]; then
+if [ -d /etc/gdm ]; then
+  if [ ! "\\\$( cmdline_parameter noautologin )" ]; then
     cat >> /etc/gdm/custom.conf << FOE
 [daemon]
 TimedLoginEnable=true
@@ -488,55 +489,64 @@ TimedLogin=LIVECD_USER
 TimedLoginDelay=\\\$LOGIN_DELAY
 FOE
     sed -i "s|LIVECD_USER|\\\$LIVECD_USER|" /etc/gdm/custom.conf
+  fi
 fi
 
 ### add keyboard and display configuration utilities to the desktop
 mkdir -p /home/\\\$LIVECD_USER/Desktop >/dev/null
-cp /usr/share/applications/gnome-keyboard.desktop           /home/\\\$LIVECD_USER/Desktop/
-cp /usr/share/applications/gnome-display-properties.desktop /home/\\\$LIVECD_USER/Desktop/
+if [ -f /usr/share/applications/gnome-keyboard.desktop ]; then
+ cp /usr/share/applications/gnome-keyboard.desktop           /home/\\\$LIVECD_USER/Desktop/
+fi
+if [ -f /usr/share/applications/gnome-display-properties.desktop ]; then
+ cp /usr/share/applications/gnome-display-properties.desktop /home/\\\$LIVECD_USER/Desktop/
+fi
 
-### disable screensaver locking
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool   /apps/gnome-screensaver/lock_enabled "false" >/dev/null
+if [ -x /usr/bin/gconftool-2 ]; then
+  ### disable screensaver locking
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool   /apps/gnome-screensaver/lock_enabled "false" >/dev/null
 
-### don't do packagekit checking by default
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t int /apps/gnome-packagekit/update-icon/frequency_get_updates "0" >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_updates never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_upgrades never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_refresh_cache never >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_available false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_distro_upgrades false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_firmware false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_hardware false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_codec_helper false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_font_helper false >/dev/null
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_mime_type_helper false >/dev/null
+  ### don't do packagekit checking by default
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t int /apps/gnome-packagekit/update-icon/frequency_get_updates "0" >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_updates never >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_get_upgrades never >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /apps/gnome-packagekit/update-icon/frequency_refresh_cache never >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_available false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/update-icon/notify_distro_upgrades false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_firmware false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_check_hardware false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_codec_helper false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_font_helper false >/dev/null
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-packagekit/enable_mime_type_helper false >/dev/null
 
-# RERemix
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
-gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
+  # RERemix
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/nautilus/preferences/always_use_browser true
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /apps/gnome-terminal/global/use_menu_accelerators false
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t string /desktop/gnome/interface/toolbar_style "both-horiz"
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t list --list-type=string /apps/gedit-2/preferences/encodings/auto_detected "[UTF-8,CURRENT,WINDOWS-1251,KOI8R,ISO-8859-5]"
+  gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults -s -t bool /desktop/gnome/interface/menus_have_icons true
 
-# adding keyboard switchers
-if [ -f /etc/sysconfig/keyboard ]; then
+  # adding keyboard switchers
+  if [ -f /etc/sysconfig/keyboard ]; then
     . /etc/sysconfig/keyboard
     # GNOME
     LAYOUT_OPT=\$(echo \$OPTIONS | sed 's!grp:!grp\tgrp:!g;s!grp_led:!grp\tgrp_led:!g')
 
     if [ -d /etc/gconf/gconf.xml.defaults ]; then
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/layouts "[\$LAYOUT]" > /dev/null
-        /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-            -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/options "[\$LAYOUT_OPT]" > /dev/null
+      /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+          -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/layouts "[\$LAYOUT]" > /dev/null
+      /usr/bin/gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+          -s -t list --list-type=string /desktop/gnome/peripherals/keyboard/kbd/options "[\$LAYOUT_OPT]" > /dev/null
     fi
+  fi
 fi
 # END RERemix
 
 ### start system-config-firewall with su 
 #  (bugfix: system-config-firewall does not work when root has no password)
-sed -i "s|^Exec=.*|Exec=su - -c /usr/bin/system-config-firewall|" /usr/share/applications/system-config-firewall.desktop
-sed -i "s|^Terminal=.*|Terminal=true|"                            /usr/share/applications/system-config-firewall.desktop
+if [ -f /usr/share/applications/system-config-firewall.desktop ]; then
+  sed -i "s|^Exec=.*|Exec=su - -c /usr/bin/system-config-firewall|" /usr/share/applications/system-config-firewall.desktop
+  sed -i "s|^Terminal=.*|Terminal=true|"                            /usr/share/applications/system-config-firewall.desktop
+fi
 
 ### don't use prelink on a running live image
 sed -i 's/PRELINKING=yes/PRELINKING=no/' /etc/sysconfig/prelink &>/dev/null
