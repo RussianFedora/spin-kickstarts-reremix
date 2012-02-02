@@ -39,6 +39,7 @@ libreoffice-writer
 @system-admin-tools
 k3b-extras-freeworld
 kdm
+system-config-firewall
 
 # more groups added 
 lftp
@@ -60,6 +61,29 @@ sed -i 's/#AutoLoginUser=fred/AutoLoginUser=liveuser/' /etc/kde/kdm/kdmrc
 # set up user liveuser as default user and preselected user
 sed -i 's/#PreselectUser=Default/PreselectUser=Default/' /etc/kde/kdm/kdmrc
 sed -i 's/#DefaultUser=johndoe/DefaultUser=liveuser/' /etc/kde/kdm/kdmrc
+
+# add liveinst.desktop to favorites menu
+mkdir -p /home/liveuser/.kde/share/config/
+cat > /home/liveuser/.kde/share/config/kickoffrc << MENU_EOF
+[Favorites]
+FavoriteURLs=/usr/share/applications/kde4/konqbrowser.desktop,/usr/share/applications/kde4/dolphin.desktop,/usr/share/applications/kde4/systemsettings.desktop,/usr/share/applications/liveinst.desktop
+MENU_EOF
+
+# show liveinst.desktop on desktop and in menu
+sed -i 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
+
+cp /usr/share/applications/liveinst.desktop /home/\\\$LIVECD_USER/Desktop/
+
+# chmod +x ~/Desktop/liveinst.desktop to disable KDE's security warning
+chmod +x /usr/share/applications/liveinst.desktop
+
+# copy over the icons for liveinst to hicolor
+cp /usr/share/icons/gnome/16x16/apps/system-software-install.png /usr/share/icons/hicolor/16x16/apps/
+cp /usr/share/icons/gnome/22x22/apps/system-software-install.png /usr/share/icons/hicolor/22x22/apps/
+cp /usr/share/icons/gnome/24x24/apps/system-software-install.png /usr/share/icons/hicolor/24x24/apps/
+cp /usr/share/icons/gnome/32x32/apps/system-software-install.png /usr/share/icons/hicolor/32x32/apps/
+cp /usr/share/icons/gnome/scalable/apps/system-software-install.svg /usr/share/icons/hicolor/scalable/apps/
+touch /usr/share/icons/hicolor/
 
 # make kdm russian
 if [ -f /etc/kde/kdm/kdmrc ]; then
