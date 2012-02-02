@@ -1,0 +1,17 @@
+# sl62-livecd-gnome-ru_RU.ks 
+#
+# Maintainer(s):
+# - Arkady L. Shane <ashejn [AT] russianfedora [DOT] ru>
+
+%include sl62-livecd-gnome.ks
+
+lang ru_RU.UTF-8
+keyboard ru
+timezone Europe/Moscow
+
+%packages
+@russian-support
+hunspell-ru
+autocorr-en
+libreoffice-langpack-ru
+%end
