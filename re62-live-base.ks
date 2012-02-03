@@ -15,19 +15,19 @@ selinux --enforcing
 firewall --enabled --service=mdns
 
 # SL repositories
-repo --name=base      --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/reremix/x86_64/
-repo --name=security  --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/reremix-security/x86_64/
-repo --name=epel      --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/epel/x86_64/
-repo --name=puias-addons --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-addons/6.2/x86_64/
-repo --name=puias-addons-updates --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-addons-updates/6.2/x86_64/
-repo --name=puias-computational --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-computational/6.2/x86_64/
-repo --name=elrepo --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/elrepo/x86_64/
-repo --name=free-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=free-reremix-6&arch=x86_64
-repo --name=free-reremix-updates-released --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=free-reremix-updates-released-6&arch=x86_64
-repo --name=nonfree-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=nonfree-reremix-6&arch=x86_64
-repo --name=nonfree-reremix-updates-released --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=nonfree-reremix-updates-released-6&arch=x86_64
-repo --name=fixes-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=fixes-reremix-6&arch=x86_64
-repo --name=fixes-reremix-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=fixes-reremix-updates-released-6&arch=x86_64
+repo --name=base      --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/reremix/$basearch/
+repo --name=security  --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/reremix-security/$basearch/
+repo --name=epel      --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/epel/$basearch/
+repo --name=puias-addons --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-addons/6.2/$basearch/
+repo --name=puias-addons-updates --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-addons-updates/6.2/$basearch/
+repo --name=puias-computational --baseurl=http://mirror.yandex.ru/mirrors/PUIAS/puias-computational/6.2/$basearch/
+repo --name=elrepo --baseurl=http://mirror.yandex.ru/fedora/russianfedora/build/6.2/elrepo/$basearch/
+repo --name=free-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=free-reremix-6&arch=$basearch
+repo --name=free-reremix-updates-released --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=free-reremix-updates-released-6&arch=$basearch
+repo --name=nonfree-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=nonfree-reremix-6&arch=$basearch
+repo --name=nonfree-reremix-updates-released --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=nonfree-reremix-updates-released-6&arch=$basearch
+repo --name=fixes-reremix --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=fixes-reremix-6&arch=$basearch
+repo --name=fixes-reremix-updates --mirrorlist=http://mirrors.rfremix.ru/mirrorlist/?repo=fixes-reremix-updates-released-6&arch=$basearch
 
 # fastbugs is disabled
 #repo --name=fastbugs  --baseurl=http://ftp.scientificlinux.org/linux/scientific/6.2/$basearch/updates/fastbugs/
@@ -494,6 +494,9 @@ fi
 
 ### add keyboard and display configuration utilities to the desktop
 mkdir -p /home/\\\$LIVECD_USER/Desktop >/dev/null
+
+cp /usr/share/applications/liveinst.desktop /home/\\\$LIVECD_USER/Desktop/
+
 if [ -f /usr/share/applications/gnome-keyboard.desktop ]; then
  cp /usr/share/applications/gnome-keyboard.desktop           /home/\\\$LIVECD_USER/Desktop/
 fi

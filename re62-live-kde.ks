@@ -63,16 +63,14 @@ sed -i 's/#PreselectUser=Default/PreselectUser=Default/' /etc/kde/kdm/kdmrc
 sed -i 's/#DefaultUser=johndoe/DefaultUser=liveuser/' /etc/kde/kdm/kdmrc
 
 # add liveinst.desktop to favorites menu
-mkdir -p /home/liveuser/.kde/share/config/
-cat > /home/liveuser/.kde/share/config/kickoffrc << MENU_EOF
-[Favorites]
-FavoriteURLs=/usr/share/applications/kde4/konqbrowser.desktop,/usr/share/applications/kde4/dolphin.desktop,/usr/share/applications/kde4/systemsettings.desktop,/usr/share/applications/liveinst.desktop
-MENU_EOF
+#mkdir -p /home/liveuser/.kde/share/config/
+#cat > /home/liveuser/.kde/share/config/kickoffrc << MENU_EOF
+#[Favorites]
+#FavoriteURLs=/usr/share/applications/kde4/konqbrowser.desktop,/usr/share/applications/kde4/dolphin.desktop,/usr/share/applications/kde4/systemsettings.desktop,/usr/share/applications/liveinst.desktop
+#MENU_EOF
 
 # show liveinst.desktop on desktop and in menu
 sed -i 's/NoDisplay=true/NoDisplay=false/' /usr/share/applications/liveinst.desktop
-
-cp /usr/share/applications/liveinst.desktop /home/\\\$LIVECD_USER/Desktop/
 
 # chmod +x ~/Desktop/liveinst.desktop to disable KDE's security warning
 chmod +x /usr/share/applications/liveinst.desktop
