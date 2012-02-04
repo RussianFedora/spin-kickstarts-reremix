@@ -48,5 +48,6 @@ libreoffice-calc
 autocorr-en
 java-1.6.0-openjdk
 icedtea-web
+@hardware-support
 
 %end
