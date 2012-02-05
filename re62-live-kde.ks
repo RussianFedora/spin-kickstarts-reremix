@@ -40,6 +40,9 @@ libreoffice-writer
 k3b-extras-freeworld
 kdm
 system-config-firewall
+vlc
+vlc-extras
+transmission-qt
 
 # more groups added 
 lftp
