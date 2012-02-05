@@ -679,6 +679,9 @@ fi
 ### give back ownership to the default user
 chown -R \\\$LIVECD_USER:\\\$LIVECD_USER /home/\\\$LIVECD_USER
 
+# turn off rfremixconf script
+chkconfig --level 345 reremixconf off 2>/dev/null
+
 EOF_initscript
 #***********************************************************************
 # End of livesys script
@@ -749,9 +752,6 @@ fi
 if [ "\\\$kb" ]; then
     exists system-config-keyboard --noui \\\$kb 
 fi
-
-# turn off rfremixconf script
-chkconfig --level 345 reremixconf off 2>/dev/null
 
 EOF_lateinitscript
 #***********************************************************************
