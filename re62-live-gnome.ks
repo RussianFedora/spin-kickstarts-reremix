@@ -79,6 +79,7 @@ thunderbird
 -scenery-backgrounds
 -redhat-lsb-graphics
 -qt3
+-qt
 -xinetd
 -pinentry-gtk
 seahorse
