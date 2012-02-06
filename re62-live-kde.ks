@@ -44,6 +44,7 @@ vlc
 vlc-extras
 transmission-qt
 -system-config-kdump
+-kexec-tools
 
 # more groups added 
 lftp
