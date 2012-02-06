@@ -80,6 +80,10 @@ thunderbird
 -redhat-lsb-graphics
 -qt3
 -qt
+-qt-x11
+-qt-sqlite
+-phonon-backend-gstreamer
+-ibus-qt
 -xinetd
 -pinentry-gtk
 seahorse
