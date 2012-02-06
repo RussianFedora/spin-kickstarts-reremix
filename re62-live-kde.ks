@@ -43,6 +43,7 @@ system-config-firewall
 vlc
 vlc-extras
 transmission-qt
+-system-config-kdump
 
 # more groups added 
 lftp
