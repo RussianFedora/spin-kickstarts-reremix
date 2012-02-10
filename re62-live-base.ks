@@ -850,6 +850,11 @@ grep -A3 'label check0'            \$LIVE_ROOT/isolinux/isolinux.cfg > \$LIVE_RO
 grep -A2 'label memtest'           \$LIVE_ROOT/isolinux/isolinux.cfg > \$LIVE_ROOT/isolinux/memtest.txt
 grep -A2 'label local'             \$LIVE_ROOT/isolinux/isolinux.cfg > \$LIVE_ROOT/isolinux/localboot.txt
 
+sed "s/label linux0/label linuxram0/"    \$LIVE_ROOT/isolinux/default.txt > \$LIVE_ROOT/isolinux/ramboot.txt
+sed -i "s/Boot/Boot into RAM/"                                              \$LIVE_ROOT/isolinux/ramboot.txt
+sed -i "s/liveimg/liveimg live_inst/"                                       \$LIVE_ROOT/isolinux/ramboot.txt
+sed -i "/menu default/d"                                                    \$LIVE_ROOT/isolinux/ramboot.txt
+
 sed "s/label linux0/label linuxtext0/"   \$LIVE_ROOT/isolinux/default.txt > \$LIVE_ROOT/isolinux/textboot.txt
 sed -i "s/Boot/Boot (Text Mode)/"                                           \$LIVE_ROOT/isolinux/textboot.txt
 sed -i "s/liveimg/liveimg 3/"                                               \$LIVE_ROOT/isolinux/textboot.txt
@@ -875,6 +880,7 @@ diff \$LIVE_ROOT/isolinux/isolinux.cfg \$LIVE_ROOT/isolinux/current.txt | sed '/
 
 cat \$LIVE_ROOT/isolinux/cleaned.txt      \
     \$LIVE_ROOT/isolinux/default.txt      \
+    \$LIVE_ROOT/isolinux/ramboot.txt      \
     \$LIVE_ROOT/isolinux/textboot.txt     \
     \$LIVE_ROOT/isolinux/basicvideo.txt   \
     \$LIVE_ROOT/isolinux/check.txt        \
