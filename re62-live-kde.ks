@@ -42,6 +42,7 @@ kdm
 system-config-firewall
 vlc
 vlc-extras
+clementine
 transmission-qt
 -system-config-kdump
 -kexec-tools
