@@ -29,7 +29,6 @@ nmap
 @kde-desktop
 konversation
 thunderbird
-firefox
 libreoffice-calc
 libreoffice-draw
 libreoffice-impress
@@ -44,6 +43,7 @@ vlc
 vlc-extras
 clementine
 transmission-qt
+chromium
 -system-config-kdump
 -kexec-tools
 
