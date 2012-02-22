@@ -92,7 +92,6 @@ seahorse
 -nano
 -pinfo
 -vim-common
-vim-enhanced
 
 evince
 gimp

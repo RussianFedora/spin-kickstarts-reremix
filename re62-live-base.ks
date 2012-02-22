@@ -190,6 +190,8 @@ isomd5sum
 -ipa-pmincho-fonts
 -jomolhari-fonts
 
+vim-enhanced
+
 %end
 
 
