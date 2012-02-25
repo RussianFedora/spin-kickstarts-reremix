@@ -98,6 +98,8 @@ gimp
 totem-mozplugin
 transmission-gtk
 pidgin
+remmina
+remmina-plugins
 
 ## remove some fonts and input methods
 # remove Chinese font (Ming face) (8.9 MB)
