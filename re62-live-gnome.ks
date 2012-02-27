@@ -99,6 +99,7 @@ totem-mozplugin
 transmission-gtk
 pidgin
 remmina
+parcellite
 
 ## remove some fonts and input methods
 # remove Chinese font (Ming face) (8.9 MB)
